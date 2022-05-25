@@ -8,10 +8,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ObrasComponent } from './obras/obras.component';
 import { RouterModule, Routes } from '@angular/router';
+import { EncargadosComponent } from './encargados/encargados.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/inicio', pathMatch: 'full'},
+  {path: '', redirectTo: '/obras', pathMatch: 'full'},
   {path: 'obras', component: ObrasComponent},
+  {path: 'encargados', component: EncargadosComponent},
+  {path: 'empleados', component: EmpleadosComponent},
 ];
 
 
@@ -20,11 +25,14 @@ const routes: Routes = [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    ObrasComponent
+    ObrasComponent,
+    EncargadosComponent,
+    EmpleadosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule,
     RouterModule.forRoot(routes)
   ],
