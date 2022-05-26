@@ -11,16 +11,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { EncargadosComponent } from './encargados/encargados.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormObrasComponent } from './form-obras/form-obras.component';
-import { FormEncargadosComponent } from './form-encargados/form-encargados.component';
-import { FormEmpleadosComponent } from './form-empleados/form-empleados.component';
+import { FormObrasComponent } from './obras/form-obras/form-obras.component';
+import { FormEncargadosComponent } from './encargados/form-encargados/form-encargados.component';
+import { FormEmpleadosComponent } from './empleados/form-empleados/form-empleados.component';
 import { FormsModule } from '@angular/forms';
+import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/obras', pathMatch: 'full'},
   {path: 'obras', component: ObrasComponent},
+  {path: 'obras/form', component: FormObrasComponent},
+  {path: 'obras/form/:id', component: FormObrasComponent},
   {path: 'encargados', component: EncargadosComponent},
+  {path: 'encargados/form', component: FormEncargadosComponent},
+  {path: 'encargados/form/:id', component: FormEncargadosComponent},
   {path: 'empleados', component: EmpleadosComponent},
+  {path: 'empleados/form', component: FormEmpleadosComponent},
+  {path: 'empleados/form/:id', component: FormEmpleadosComponent}
 ];
 
 
@@ -34,7 +41,8 @@ const routes: Routes = [
     EmpleadosComponent,
     FormObrasComponent,
     FormEncargadosComponent,
-    FormEmpleadosComponent
+    FormEmpleadosComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

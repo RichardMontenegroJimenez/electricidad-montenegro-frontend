@@ -25,4 +25,16 @@ export class ObraService {
     return this.http.post<Obra>(this.urlEndPoint, obra, {headers: this.httpHeaders})
   }
 
+  getObra(id): Observable<Obra>{
+    return this.http.get<Obra>(`${this.urlEndPoint}/${id}`)
+  }
+
+  update(obra: Obra): Observable<Obra>{
+    return this.http.put<Obra>(`${this.urlEndPoint}/${obra.id}` , obra, {headers: this.httpHeaders} )
+  }
+  
+  delete(id: number): Observable<Obra>{
+    return this.http.delete<Obra>(`${this.urlEndPoint}/${id}` , {headers: this.httpHeaders})
+  }
+
 }

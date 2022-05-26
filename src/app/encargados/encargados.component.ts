@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Encargado } from './encargado';
 import { EncargadoService } from './encargado.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-encargados',
@@ -17,5 +18,37 @@ export class EncargadosComponent implements OnInit {
     this.encargadoService.getEncargados().subscribe(
       encargados => this.encargados = encargados
     );
+  }
+
+  delete(encargado: Encargado):void {
+    swal({
+      title: 'Está seguro?',
+      text: `¿Seguro que desea eliminar al encargado ${encargado.nombre} ${encargado.apellido}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+
+        this.encargadoService.delete(encargado.id).subscribe(
+          response => {
+            this.encargados = this.encargados.filter(cli => cli !== encargado)
+            swal(
+              'Encargado eliminado!',
+              `Encargado ${encargado.nombre} eliminado con éxito.`,
+              'success'
+            )
+          }
+        )
+
+      }
+    })
   }
 }

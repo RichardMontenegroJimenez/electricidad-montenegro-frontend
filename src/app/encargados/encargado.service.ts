@@ -24,4 +24,16 @@ export class EncargadoService {
   create(encargado: Encargado) : Observable<Encargado> {
     return this.http.post<Encargado>(this.urlEndPoint, encargado, {headers: this.httpHeaders})
   }
+
+  getEncargado(id): Observable<Encargado>{
+    return this.http.get<Encargado>(`${this.urlEndPoint}/${id}`)
+  }
+
+  update(encargado: Encargado): Observable<Encargado>{
+    return this.http.put<Encargado>(`${this.urlEndPoint}/${encargado.id}` , encargado, {headers: this.httpHeaders} )
+  }
+
+  delete(id: number): Observable<Encargado>{
+    return this.http.delete<Encargado>(`${this.urlEndPoint}/${id}` , {headers: this.httpHeaders})
+  }
 }
