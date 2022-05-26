@@ -11,6 +11,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { EncargadosComponent } from './encargados/encargados.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormObrasComponent } from './form-obras/form-obras.component';
+import { FormEncargadosComponent } from './form-encargados/form-encargados.component';
+import { FormEmpleadosComponent } from './form-empleados/form-empleados.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', redirectTo: '/obras', pathMatch: 'full'},
@@ -27,12 +31,16 @@ const routes: Routes = [
     FooterComponent,
     ObrasComponent,
     EncargadosComponent,
-    EmpleadosComponent
+    EmpleadosComponent,
+    FormObrasComponent,
+    FormEncargadosComponent,
+    FormEmpleadosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     NgbModule,
     RouterModule.forRoot(routes)
   ],
