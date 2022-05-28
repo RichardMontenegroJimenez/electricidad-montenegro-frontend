@@ -1,0 +1,31 @@
+<app-form-empleados></app-form-empleados>
+<div class="card border-dark mb-3">
+    <div class="card-header">Empleados</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">Listado de empleados</h5>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Fecha de contratación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let empleado of empleados">
+                <td>{{ empleado.id }}</td>
+                <td>{{ empleado.nombre }}</td>
+                <td>{{ empleado.apellido }}</td>
+                <td>{{ empleado.dni }}</td>
+                <td>{{ empleado.contratacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+  </div>
