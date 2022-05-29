@@ -11,7 +11,8 @@ import swal from 'sweetalert2';
 })
 export class FormEmpleadosComponent implements OnInit {
   public empleado: Empleado = new Empleado();
-  public titulo:string = "Crear Empleado"
+  public titulo:string = "Crear Empleado";
+  public errores: string[];
 
   constructor(private empleadoService: EmpleadoService,
     private router: Router,
@@ -34,7 +35,13 @@ export class FormEmpleadosComponent implements OnInit {
     this.empleadoService.create(this.empleado).subscribe(Empleado => {
       this.router.navigate(['/empleados'])
       swal('Nuevo empleado', `Empleado ${this.empleado.nombre} creado con éxito!`, 'success')
-  });
+  }, 
+  err => {
+    this.errores = err.error.errors as string [];
+    console.error('Código del error desde el backend' + err.status);
+    console.error(err.error.errors);
+  }
+  );
   }
 
   update():void{
@@ -42,9 +49,13 @@ export class FormEmpleadosComponent implements OnInit {
     .subscribe( empleado => {
       this.router.navigate(['empleados'])
       swal('Empleado actualizado', `Empleado ${this.empleado.nombre} actualizado con éxito!`, 'success')
+    }, 
+    err => {
+      this.errores = err.error.errors as string [];
+      console.error('Código del error desde el backend' + err.status);
+      console.error(err.error.errors);
     }
-
-    )
+    );
   }
 
 }

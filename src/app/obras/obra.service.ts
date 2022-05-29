@@ -27,8 +27,14 @@ export class ObraService {
   create(obra: Obra) : Observable<Obra> {
     return this.http.post<Obra>(this.urlEndPoint, obra, {headers: this.httpHeaders}).pipe(
       catchError(e => {
+
+        //Manejo de errores que vienen del backend (badrequest)
+        if(e.status==400){
+          return throwError(e);
+        }
+
         console.error(e.error.mensaje);
-        swal('Error al crear la obra', e.error.error, 'error');
+        swal('Error al crear la obra', e.error.mensaje, 'error');
         return throwError(e);
       })
     );
@@ -48,8 +54,14 @@ export class ObraService {
   update(obra: Obra): Observable<Obra>{
     return this.http.put<Obra>(`${this.urlEndPoint}/${obra.id}` , obra, {headers: this.httpHeaders} ).pipe(
       catchError(e => {
+
+        //Manejo de errores que vienen del backend (badrequest)
+        if(e.status==400){
+          return throwError(e);
+        }
+
         console.error(e.error.mensaje);
-        swal('Error al editar la obra', e.error.error, 'error');
+        swal('Error al editar la obra', e.error.mensaje, 'error');
         return throwError(e);
       })
     );
@@ -59,7 +71,7 @@ export class ObraService {
     return this.http.delete<Obra>(`${this.urlEndPoint}/${id}` , {headers: this.httpHeaders}).pipe(
       catchError(e => {
         console.error(e.error.mensaje);
-        swal('Error al eliminar la obra', e.error.error, 'error');
+        swal('Error al eliminar la obra', e.error.mensaje, 'error');
         return throwError(e);
       })
     );

@@ -14,6 +14,8 @@ export class FormObrasComponent implements OnInit {
   public obra: Obra = new Obra();
   public titulo:string = "Crear Obra"
 
+  public errores: string[];
+
   constructor(private obraService: ObraService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
@@ -36,7 +38,13 @@ export class FormObrasComponent implements OnInit {
     .subscribe(Obra => {
       this.router.navigate(['/obras'])
       swal('Nueva obra', `Obra ${this.obra.denominacion} creada con éxito!`, 'success')
-    });
+    }, 
+    err => {
+      this.errores = err.error.errors as string [];
+      console.error('Código del error desde el backend' + err.status);
+      console.error(err.error.errors);
+    }
+    );
     
   }
 
@@ -45,9 +53,13 @@ export class FormObrasComponent implements OnInit {
     .subscribe( obra => {
       this.router.navigate(['obras'])
       swal('Obra actualizada', `Obra ${this.obra.denominacion} actualizada con éxito!`, 'success')
+    }, 
+    err => {
+      this.errores = err.error.errors as string [];
+      console.error('Código del error desde el backend' + err.status);
+      console.error(err.error.errors);
     }
-
-    )
+    );
   }
   
 }
