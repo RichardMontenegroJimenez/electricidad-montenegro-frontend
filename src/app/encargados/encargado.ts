@@ -4,4 +4,5 @@ export class Encargado {
     apellido: string;
     dni: string;
     contratacion: string;
+    foto: string;
 }

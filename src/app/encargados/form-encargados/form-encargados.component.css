@@ -1,0 +1,8 @@
+mat-datepicker-toggle {
+    color: white !important;
+}
+
+.custom-datepicker{
+    display: inline;
+    width: 300px;
+}

@@ -4,4 +4,5 @@ export class Empleado {
     apellido: string;
     dni: string;
     contratacion: string;
+    foto: string;
 }

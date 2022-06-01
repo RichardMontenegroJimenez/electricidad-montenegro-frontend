@@ -11,16 +11,35 @@ import { RouterModule, Routes } from '@angular/router';
 import { EncargadosComponent } from './encargados/encargados.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormObrasComponent } from './form-obras/form-obras.component';
-import { FormEncargadosComponent } from './form-encargados/form-encargados.component';
-import { FormEmpleadosComponent } from './form-empleados/form-empleados.component';
+import { FormObrasComponent } from './obras/form-obras/form-obras.component';
+import { FormEncargadosComponent } from './encargados/form-encargados/form-encargados.component';
+import { FormEmpleadosComponent } from './empleados/form-empleados/form-empleados.component';
 import { FormsModule } from '@angular/forms';
+import { InicioComponent } from './inicio/inicio.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE } from '@angular/material/core'
+import {MatInputModule} from '@angular/material/input';
+import { PerfilComponent } from './encargados/perfil/perfil.component';
+import { PerfilEmpleadoComponent } from './empleados/perfil-empleado/perfil-empleado.component';
+
+
 
 const routes: Routes = [
-  {path: '', redirectTo: '/obras', pathMatch: 'full'},
+  {path: '', redirectTo: '/inicio', pathMatch: 'full'},
+  {path: 'inicio', component: InicioComponent},
   {path: 'obras', component: ObrasComponent},
+  {path: 'obras/form', component: FormObrasComponent},
+  {path: 'obras/form/:id', component: FormObrasComponent},
   {path: 'encargados', component: EncargadosComponent},
+  {path: 'encargados/form', component: FormEncargadosComponent},
+  {path: 'encargados/form/:id', component: FormEncargadosComponent},
   {path: 'empleados', component: EmpleadosComponent},
+  {path: 'empleados/form', component: FormEmpleadosComponent},
+  {path: 'empleados/form/:id', component: FormEmpleadosComponent},
+  {path: 'encargados/perfil/:id', component: PerfilComponent},
+  {path: 'empleados/perfil/:id', component: PerfilEmpleadoComponent}
 ];
 
 
@@ -34,7 +53,10 @@ const routes: Routes = [
     EmpleadosComponent,
     FormObrasComponent,
     FormEncargadosComponent,
-    FormEmpleadosComponent
+    FormEmpleadosComponent,
+    InicioComponent,
+    PerfilComponent,
+    PerfilEmpleadoComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +64,16 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     NgbModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatDatepickerModule, 
+    MatMomentDateModule,
+    MatInputModule
+
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
