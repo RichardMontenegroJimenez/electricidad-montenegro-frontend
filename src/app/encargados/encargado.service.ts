@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Encargado } from './encargado';
-import { ENCARGADOS } from './encargados.json';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -92,4 +91,18 @@ export class EncargadoService {
         })
       );
   }
+
+    subirFoto(archivo: File, id): Observable<Encargado>{
+      let formData = new FormData();
+      formData.append("archivo", archivo);
+      formData.append("id", id);
+      return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
+        map( (response: any) => response.encargado as Encargado),
+        catchError((e) => {
+          console.error(e.error.mensaje);
+          swal('Error al subir foto', e.error.mensaje, 'error');
+          return throwError(e);
+        })
+      );
+    }
 }

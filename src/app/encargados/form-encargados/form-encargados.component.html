@@ -33,9 +33,11 @@
             </div>
 
             <div class="form-group row">
-                <label for="contratacion" class="col-form-label col-sm-2">Contratación</label>
+                <label for="contratacion" class="col-form-label col-sm-2"> Fecha de Contratación</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)] ="encargado.contratacion" name="contratacion">
+                    <input matInput [matDatepicker]="picker" class="form-control custom-datepicker" [(ngModel)] ="encargado.contratacion" name="contratacion">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </div>
             </div>
 

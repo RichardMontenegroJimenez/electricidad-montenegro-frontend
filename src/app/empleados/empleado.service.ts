@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Empleado } from './empleado';
-import { EMPLEADOS } from './empleados.json';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -80,6 +79,20 @@ export class EmpleadoService {
       catchError(e => {
         console.error(e.error.mensaje);
         swal('Error al eliminar al empleado', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
+  }
+
+  subirFoto(archivo: File, id): Observable<Empleado>{
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
+      map( (response: any) => response.empleado as Empleado),
+      catchError((e) => {
+        console.error(e.error.mensaje);
+        swal('Error al subir foto', e.error.mensaje, 'error');
         return throwError(e);
       })
     );

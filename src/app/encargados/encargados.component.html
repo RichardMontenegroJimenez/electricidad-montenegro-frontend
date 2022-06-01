@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let encargado of encargados">
-                <td>{{ encargado.id }}</td>
+                <td><button type="button" [routerLink]="['/encargados/perfil', encargado.id]" class="btn btn-success">{{ encargado.id }}</button></td>
                 <td>{{ encargado.nombre }}</td>
                 <td>{{ encargado.apellido }}</td>
                 <td>{{ encargado.dni }}</td>

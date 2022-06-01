@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let empleado of empleados">
-                <td>{{ empleado.id }}</td>
+                <td><button type="button" [routerLink]="['/empleados/perfil', empleado.id]" class="btn btn-success">{{ empleado.id }}</button></td>
                 <td>{{ empleado.nombre }}</td>
                 <td>{{ empleado.apellido }}</td>
                 <td>{{ empleado.dni }}</td>
