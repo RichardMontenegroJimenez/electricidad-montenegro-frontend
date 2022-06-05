@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class EncargadosComponent implements OnInit {
 
   encargados: Encargado[] = [];
+  encargadoSeleccionado: Encargado;
 
   constructor(private encargadoService : EncargadoService) { }
 
@@ -50,5 +51,9 @@ export class EncargadosComponent implements OnInit {
 
       }
     })
+  }
+
+  abrirModal(encargado: Encargado){
+    this.encargadoSeleccionado = encargado;
   }
 }

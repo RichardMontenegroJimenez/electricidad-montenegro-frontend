@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Empleado } from './empleado';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
@@ -84,17 +84,15 @@ export class EmpleadoService {
     );
   }
 
-  subirFoto(archivo: File, id): Observable<Empleado>{
+  subirFoto(archivo: File, id): Observable<HttpEvent<{}>>{
     let formData = new FormData();
     formData.append("archivo", archivo);
     formData.append("id", id);
-    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
-      map( (response: any) => response.empleado as Empleado),
-      catchError((e) => {
-        console.error(e.error.mensaje);
-        swal('Error al subir foto', e.error.mensaje, 'error');
-        return throwError(e);
-      })
-    );
+    
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
   }
 }

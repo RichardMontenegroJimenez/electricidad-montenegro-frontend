@@ -12,10 +12,17 @@
                         <li class="list-group-item">{{ empleado.contratacion }}</li>
                     </ul>
 
-                    <div class="input-group">
+                    <div class="input-group mb-3">
                         <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
-                      </div>
+                    </div>    
+                    
+                    <div *ngIf="progreso > 0" class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width:progreso + '%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
+                            {{progreso}}%
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-sm">
                     <img *ngIf="empleado?.foto" src="http://localhost:8080/api/uploads/img/empleado/{{empleado.foto}}" alt="{{empleado.foto}}" class="img-thumbnail rounded">

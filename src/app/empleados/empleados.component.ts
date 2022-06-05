@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class EmpleadosComponent implements OnInit {
 
   empleados: Empleado[] = [];
+  empleadoSeleccionado: Empleado;
 
   constructor(private empleadoService : EmpleadoService) { }
 
@@ -50,5 +51,8 @@ export class EmpleadosComponent implements OnInit {
 
       }
     })
+  }
+  abrirModal(empleado: Empleado){
+    this.empleadoSeleccionado = empleado;
   }
 }

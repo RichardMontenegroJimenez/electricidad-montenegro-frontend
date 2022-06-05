@@ -1,3 +1,4 @@
+<perfil-encargado *ngIf ="encargadoSeleccionado" [encargado] = "encargadoSeleccionado"></perfil-encargado>
 <div>
     <button type="button" name="button" [routerLink]="['/encargados/form']" class="btn btn-primary">Crear nuevo encargado</button>
 </div>
@@ -22,7 +23,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let encargado of encargados">
-                <td><button type="button" [routerLink]="['/encargados/perfil', encargado.id]" class="btn btn-success">{{ encargado.id }}</button></td>
+                <td><button type="button" (click)="abrirModal(encargado)" class="btn btn-success">{{ encargado.id }}</button></td>
                 <td>{{ encargado.nombre }}</td>
                 <td>{{ encargado.apellido }}</td>
                 <td>{{ encargado.dni }}</td>

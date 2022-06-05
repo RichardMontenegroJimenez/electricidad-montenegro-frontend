@@ -1,3 +1,4 @@
+<perfil-empleado *ngIf ="empleadoSeleccionado"  [empleado] = "empleadoSeleccionado"></perfil-empleado>
 <div>
     <button type="button" name="button" [routerLink]="['/empleados/form']" class="btn btn-primary">Crear nuevo empleado</button>
 </div>
@@ -22,7 +23,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let empleado of empleados">
-                <td><button type="button" [routerLink]="['/empleados/perfil', empleado.id]" class="btn btn-success">{{ empleado.id }}</button></td>
+                <td><button type="button" (click)="abrirModal(empleado)" class="btn btn-success">{{ empleado.id }}</button></td>
                 <td>{{ empleado.nombre }}</td>
                 <td>{{ empleado.apellido }}</td>
                 <td>{{ empleado.dni }}</td>
