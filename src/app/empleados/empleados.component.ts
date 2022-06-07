@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
 import swal from 'sweetalert2';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-empleados',
@@ -13,12 +14,19 @@ export class EmpleadosComponent implements OnInit {
   empleados: Empleado[] = [];
   empleadoSeleccionado: Empleado;
 
-  constructor(private empleadoService : EmpleadoService) { }
+  constructor(private empleadoService : EmpleadoService,
+    private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.empleadoService.getEmpleados().subscribe(
       empleados => this.empleados = empleados
     );
+    //Actualizar foto
+    this.modalService.notificarUpload.subscribe(empleado => {
+      this.empleadoSeleccionado.foto = empleado.foto;
+    })
+
+
   }
 
   delete(empleado: Empleado):void {
@@ -54,5 +62,6 @@ export class EmpleadosComponent implements OnInit {
   }
   abrirModal(empleado: Empleado){
     this.empleadoSeleccionado = empleado;
+    this.modalService.abrirModal();
   }
 }

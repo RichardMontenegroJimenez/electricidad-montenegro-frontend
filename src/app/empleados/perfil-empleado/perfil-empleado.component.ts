@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Empleado } from '../empleado';
 import { EmpleadoService } from '../empleado.service';
 import swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'perfil-empleado',
@@ -18,7 +18,7 @@ export class PerfilEmpleadoComponent implements OnInit {
   progreso:number = 0;
 
   constructor(private empleadoService: EmpleadoService, 
-    private activatedRoute: ActivatedRoute) { }
+    public modalService: ModalService) { }
 
   ngOnInit(): void {
 
@@ -47,10 +47,18 @@ export class PerfilEmpleadoComponent implements OnInit {
         } else if(event.type === HttpEventType.Response){
           let response: any = event.body;
           this.empleado = response.empleado as Empleado;
+          //emitter para actualizar la foto en la vista
+          this.modalService.notificarUpload.emit(this.empleado);
           swal('La foto se ha subido correctamente', `La foto se ha subido con éxito: ${this.empleado.foto}`, 'success');
         }
       });
     }
+  }
+
+  cerrarModal(){
+    this.modalService.cerrarModal();
+    this.fotoSeleccionada = null;
+    this.progreso = 0;
   }
 
 }

@@ -23,7 +23,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let encargado of encargados">
-                <td><button type="button" (click)="abrirModal(encargado)" class="btn btn-success">{{ encargado.id }}</button></td>
+                <td><img (click)="abrirModal(encargado)" *ngIf="encargado?.foto" 
+                    src="http://localhost:8080/api/uploads/img/encargado/{{encargado.foto}}" alt="{{encargado.foto}}" class="img-thumbnail rounded"
+                    style="width:64px; cursor: pointer;">
+
+                    <img (click)="abrirModal(encargado)" *ngIf="!encargado?.foto" 
+                    src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+                    style="width:64px; cursor: pointer;">
+                </td>
                 <td>{{ encargado.nombre }}</td>
                 <td>{{ encargado.apellido }}</td>
                 <td>{{ encargado.dni }}</td>
