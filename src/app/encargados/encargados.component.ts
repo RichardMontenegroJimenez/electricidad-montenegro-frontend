@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Encargado } from './encargado';
 import { EncargadoService } from './encargado.service';
 import swal from 'sweetalert2';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-encargados',
@@ -11,13 +12,21 @@ import swal from 'sweetalert2';
 export class EncargadosComponent implements OnInit {
 
   encargados: Encargado[] = [];
+  encargadoSeleccionado: Encargado;
 
-  constructor(private encargadoService : EncargadoService) { }
+  constructor(private encargadoService : EncargadoService,
+    private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.encargadoService.getEncargados().subscribe(
       encargados => this.encargados = encargados
     );
+
+    //Actualizar foto
+    this.modalService.notificarUpload.subscribe(encargado => {
+      this.encargadoSeleccionado.foto = encargado.foto;
+    })
+
   }
 
   delete(encargado: Encargado):void {
@@ -50,5 +59,10 @@ export class EncargadosComponent implements OnInit {
 
       }
     })
+  }
+
+  abrirModal(encargado: Encargado){
+    this.encargadoSeleccionado = encargado;
+    this.modalService.abrirModal();
   }
 }

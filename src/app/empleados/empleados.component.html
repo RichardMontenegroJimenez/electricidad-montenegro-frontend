@@ -1,3 +1,4 @@
+<perfil-empleado *ngIf ="empleadoSeleccionado"  [empleado] = "empleadoSeleccionado"></perfil-empleado>
 <div>
     <button type="button" name="button" [routerLink]="['/empleados/form']" class="btn btn-primary">Crear nuevo empleado</button>
 </div>
@@ -22,7 +23,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let empleado of empleados">
-                <td><button type="button" [routerLink]="['/empleados/perfil', empleado.id]" class="btn btn-success">{{ empleado.id }}</button></td>
+                <td><img (click)="abrirModal(empleado)" *ngIf="empleado?.foto" 
+                    src="http://localhost:8080/api/uploads/img/empleado/{{empleado.foto}}" alt="{{empleado.foto}}" class="img-thumbnail rounded"
+                    style="width:64px; cursor: pointer;">
+
+                    <img (click)="abrirModal(empleado)" *ngIf="!empleado?.foto" 
+                    src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+                    style="width:64px; cursor: pointer;">
+                </td>
                 <td>{{ empleado.nombre }}</td>
                 <td>{{ empleado.apellido }}</td>
                 <td>{{ empleado.dni }}</td>

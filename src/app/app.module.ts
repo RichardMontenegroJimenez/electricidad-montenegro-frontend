@@ -38,8 +38,6 @@ const routes: Routes = [
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'empleados/form', component: FormEmpleadosComponent},
   {path: 'empleados/form/:id', component: FormEmpleadosComponent},
-  {path: 'encargados/perfil/:id', component: PerfilComponent},
-  {path: 'empleados/perfil/:id', component: PerfilEmpleadoComponent}
 ];
 
 

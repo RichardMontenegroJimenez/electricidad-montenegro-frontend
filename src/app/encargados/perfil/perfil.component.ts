@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Encargado } from '../encargado';
 import { EncargadoService } from '../encargado.service';
 import swal from 'sweetalert2';
+import { HttpEventType } from '@angular/common/http';
+import { ModalService } from 'src/app/services/modal.service';
+
 
 @Component({
   selector: 'perfil-encargado',
@@ -11,27 +13,21 @@ import swal from 'sweetalert2';
 })
 export class PerfilComponent implements OnInit {
 
-  encargado: Encargado;
+  @Input() encargado: Encargado;
   titulo: string = "Perfil del encargado";
   private fotoSeleccionada: File;
+  progreso:number = 0;
 
   constructor(private encargadoService: EncargadoService, 
-    private activatedRoute: ActivatedRoute) { }
+    public modalService: ModalService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params =>{
-
-      let id:number = +params.get('id');
-      if(id){
-        this.encargadoService.getEncargado(id).subscribe(encargado =>{
-          this.encargado = encargado;
-        });
-      }
-    });
+    
   }
 
   seleccionarFoto(event){
     this.fotoSeleccionada = event.target.files[0];
+    this.progreso = 0;
     console.log(this.fotoSeleccionada);
     if(this.fotoSeleccionada.type.indexOf('image') < 0){
       swal('Error seleccionar imagen: ', 'El archivo debe ser una imagen', 'error');
@@ -46,11 +42,24 @@ export class PerfilComponent implements OnInit {
       swal('Error Upload: ', 'debe selecconar una foto', 'error');
     } else {
       this.encargadoService.subirFoto(this.fotoSeleccionada, this.encargado.id)
-      .subscribe(encargado => {
-        this.encargado = encargado;
-        swal('La foto se ha subido correctamente', `La foto se ha subido con éxito: ${this.encargado.foto}`, 'success');
+      .subscribe(event => {
+        if(event.type === HttpEventType.UploadProgress){
+          this.progreso = Math.round((event.loaded/event.total)*100);
+        } else if(event.type === HttpEventType.Response){
+          let response: any = event.body;
+          this.encargado = response.encargado as Encargado;
+          //emitter para actualizar la foto en la vista
+          this.modalService.notificarUpload.emit(this.encargado);
+          swal('La foto se ha subido correctamente', `La foto se ha subido con éxito: ${this.encargado.foto}`, 'success');
+        }
       });
     }
+  }
+
+  cerrarModal(){
+    this.modalService.cerrarModal();
+    this.fotoSeleccionada = null;
+    this.progreso = 0;
   }
 
 }
