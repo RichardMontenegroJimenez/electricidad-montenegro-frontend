@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { OBRAS } from './obras.json';
 import { Obra } from './obra';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Encargado } from '../encargados/encargado';
 
 
 @Injectable({
@@ -17,6 +17,10 @@ export class ObraService {
 
   constructor(private http: HttpClient,
     private router: Router) { }
+
+  getEncargados(): Observable<Encargado[]>{
+    return this.http.get<Encargado[]>(this.urlEndPoint + '/encargados');
+  }
 
   getObras(): Observable<Obra[]> {
     return this.http.get(this.urlEndPoint).pipe(

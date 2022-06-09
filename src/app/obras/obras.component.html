@@ -11,13 +11,13 @@
     <table class="table table-bordered table-striped" *ngIf="obras?.length>0">
         <thead>
             <tr>
-                <th>id</th>
+                <th>Id</th>
                 <th>Denominación</th>
                 <th>Dirección</th>
                 <th>Ciudad</th> 
                 <th>Enargado</th>
-                <th>editar</th>
-                <th>eliminar</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                 <td>{{ obra.denominacion }}</td>
                 <td>{{ obra.direccion }}</td>
                 <td>{{ obra.ciudad }}</td>
-                <td>{{ obra.encargado }}</td>
+                <td>ID: {{ obra.encargado.id }}, {{ obra.encargado.nombre }} {{ obra.encargado.apellido }}</td>
                 <td>
                     <button type="button" name="editar" [routerLink]="['/obras/form', obra.id]" class="btn btn-primary">editar</button>
                 </td>
