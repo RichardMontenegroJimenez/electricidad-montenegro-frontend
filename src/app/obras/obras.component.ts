@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Obra } from './obra';
 import { ObraService } from './obra.service';
 import swal from 'sweetalert2';
+import { AuthService } from '../usuarios/auth.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class ObrasComponent implements OnInit {
 
   obras: Obra[] = [];
 
-  constructor(private obraService : ObraService) { }
+  constructor(private obraService : ObraService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.obraService.getObras().subscribe(

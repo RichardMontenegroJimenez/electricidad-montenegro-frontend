@@ -23,6 +23,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core'
 import {MatInputModule} from '@angular/material/input';
 import { PerfilComponent } from './encargados/perfil/perfil.component';
 import { PerfilEmpleadoComponent } from './empleados/perfil-empleado/perfil-empleado.component';
+import { LoginComponent } from './usuarios/login.component';
+import { AuthGuard } from './usuarios/guards/auth.guard';
+import { RoleGuard } from './usuarios/guards/role.guard';
 
 
 
@@ -30,14 +33,15 @@ const routes: Routes = [
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: 'inicio', component: InicioComponent},
   {path: 'obras', component: ObrasComponent},
-  {path: 'obras/form', component: FormObrasComponent},
-  {path: 'obras/form/:id', component: FormObrasComponent},
+  {path: 'obras/form', component: FormObrasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path: 'obras/form/:id', component: FormObrasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'encargados', component: EncargadosComponent},
-  {path: 'encargados/form', component: FormEncargadosComponent},
-  {path: 'encargados/form/:id', component: FormEncargadosComponent},
+  {path: 'encargados/form', component: FormEncargadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path: 'encargados/form/:id', component: FormEncargadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'empleados', component: EmpleadosComponent},
-  {path: 'empleados/form', component: FormEmpleadosComponent},
-  {path: 'empleados/form/:id', component: FormEmpleadosComponent},
+  {path: 'empleados/form', component: FormEmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO']}},
+  {path: 'empleados/form/:id', component: FormEmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO']} },
+  {path: 'login', component: LoginComponent}
 ];
 
 
@@ -54,7 +58,8 @@ const routes: Routes = [
     FormEmpleadosComponent,
     InicioComponent,
     PerfilComponent,
-    PerfilEmpleadoComponent
+    PerfilEmpleadoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -53,12 +53,10 @@
             <div class="form-group row">
                 <label for="encargado" class="col-form-label col-sm-2">Encargado</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)] ="obra.encargado" name="encargado" #encargado="ngModel"> <!-- required -->
-                    <div class="alert alert-danger" *ngIf="encargado.invalid && (encargado.dirty || encargado.touched)">
-                        <div *ngIf="encargado.errors.required">
-                            Nombre  del encargado/a requerido
-                        </div>
-                    </div>
+                    <select [compareWith]="compararEncargado" class="form-control" [(ngModel)] ="obra.encargado" name="encargado" style="width: 500px;">
+                        <option [ngValue]="undefined">--- seleccionar un encargado ---</option>
+                        <option *ngFor="let encargado of encargados" [ngValue]="encargado">ID: {{ encargado.id }}, {{ encargado.nombre }} {{ encargado.apellido }}</option>
+                    </select>    
                 </div>
             </div>
 

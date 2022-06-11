@@ -4,6 +4,7 @@ import { EmpleadoService } from '../empleado.service';
 import swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
 import { ModalService } from 'src/app/services/modal.service';
+import { AuthService } from 'src/app/usuarios/auth.service';
 
 @Component({
   selector: 'perfil-empleado',
@@ -18,7 +19,8 @@ export class PerfilEmpleadoComponent implements OnInit {
   progreso:number = 0;
 
   constructor(private empleadoService: EmpleadoService, 
-    public modalService: ModalService) { }
+    public modalService: ModalService,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
 
