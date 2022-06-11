@@ -23,6 +23,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core'
 import {MatInputModule} from '@angular/material/input';
 import { PerfilComponent } from './encargados/perfil/perfil.component';
 import { PerfilEmpleadoComponent } from './empleados/perfil-empleado/perfil-empleado.component';
+import { LoginComponent } from './usuarios/login.component';
 
 
 
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'empleados', component: EmpleadosComponent},
   {path: 'empleados/form', component: FormEmpleadosComponent},
   {path: 'empleados/form/:id', component: FormEmpleadosComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 
@@ -54,7 +56,8 @@ const routes: Routes = [
     FormEmpleadosComponent,
     InicioComponent,
     PerfilComponent,
-    PerfilEmpleadoComponent
+    PerfilEmpleadoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
