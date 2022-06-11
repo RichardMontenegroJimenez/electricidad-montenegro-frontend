@@ -1,6 +1,7 @@
 <perfil-empleado *ngIf ="empleadoSeleccionado"  [empleado] = "empleadoSeleccionado"></perfil-empleado>
 <div>
-    <button type="button" name="button" [routerLink]="['/empleados/form']" class="btn btn-primary">Crear nuevo empleado</button>
+    <button *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_ENCARGADO')" 
+    type="button" name="button" [routerLink]="['/empleados/form']" class="btn btn-primary">Crear nuevo empleado</button>
 </div>
 
 <div class="card border-dark mb-3">
@@ -12,13 +13,13 @@
     <table class="table table-bordered table-striped" *ngIf="empleados?.length>0">
         <thead>
             <tr>
-                <th>id</th>
+                <th>Perfil</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>DNI</th>
                 <th>Fecha de contratación</th>
-                <th>editar</th>
-                <th>eliminar</th>
+                <th *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_ENCARGADO')">editar</th>
+                <th *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_ENCARGADO')">eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -35,10 +36,10 @@
                 <td>{{ empleado.apellido }}</td>
                 <td>{{ empleado.dni }}</td>
                 <td>{{ empleado.contratacion }}</td>
-                <td>
+                <td *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_ENCARGADO')">
                     <button type="button" name="editar" [routerLink]="['/empleados/form', empleado.id]" class="btn btn-primary">editar</button>
                 </td>
-                <td>
+                <td *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_ENCARGADO')">
                     <button type="button" name="eliminar" (click)='delete(empleado)' class="btn btn-danger ntn-sm">eliminar</button>
                 </td>
             </tr>

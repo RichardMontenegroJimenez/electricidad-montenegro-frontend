@@ -3,6 +3,7 @@ import { Empleado } from './empleado';
 import { EmpleadoService } from './empleado.service';
 import swal from 'sweetalert2';
 import { ModalService } from '../services/modal.service';
+import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-empleados',
@@ -15,7 +16,8 @@ export class EmpleadosComponent implements OnInit {
   empleadoSeleccionado: Empleado;
 
   constructor(private empleadoService : EmpleadoService,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.empleadoService.getEmpleados().subscribe(

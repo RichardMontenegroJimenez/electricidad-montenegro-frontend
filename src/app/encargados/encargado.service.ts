@@ -28,6 +28,9 @@ export class EncargadoService {
 
   private isNoAutorizado(e):boolean{
     if(e.status==401){
+      if (this.authService.isAuthenticated()){
+        this.authService.logout();
+      }
       this.router.navigate(['/login']);
       return true;
     }
@@ -40,7 +43,6 @@ export class EncargadoService {
 
     return false;
   }
-
   getEncargados(): Observable<Encargado[]> {
     return this.http.get(this.urlEndPoint, {headers: this.agregarAuthorizationHeader()}).pipe(
       map((response) => {

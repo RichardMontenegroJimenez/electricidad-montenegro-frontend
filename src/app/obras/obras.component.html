@@ -1,5 +1,5 @@
 <div>
-    <button type="button" name="button" [routerLink]="['/obras/form']" class="btn btn-primary">Crear nueva obra</button>
+    <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" name="button" [routerLink]="['/obras/form']" class="btn btn-primary">Crear nueva obra</button>
 </div>
 
 <div class="card border-dark mb-3">
@@ -16,8 +16,8 @@
                 <th>Dirección</th>
                 <th>Ciudad</th> 
                 <th>Enargado</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
+                <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +27,10 @@
                 <td>{{ obra.direccion }}</td>
                 <td>{{ obra.ciudad }}</td>
                 <td>ID: {{ obra.encargado.id }}, {{ obra.encargado.nombre }} {{ obra.encargado.apellido }}</td>
-                <td>
+                <td *ngIf="authService.hasRole('ROLE_ADMIN')">
                     <button type="button" name="editar" [routerLink]="['/obras/form', obra.id]" class="btn btn-primary">editar</button>
                 </td>
-                <td>
+                <td *ngIf="authService.hasRole('ROLE_ADMIN')">
                     <button type="button" name="eliminar" (click)='delete(obra)' class="btn btn-danger ntn-sm">eliminar</button>
                 </td>
             </tr>

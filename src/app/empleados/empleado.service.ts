@@ -28,20 +28,23 @@ export class EmpleadoService {
       return this.httpHeaders;
     }
 
-    private isNoAutorizado(e):boolean{
-      if(e.status==401){
-        this.router.navigate(['/login']);
-        return true;
+  private isNoAutorizado(e):boolean{
+    if(e.status==401){
+      if (this.authService.isAuthenticated()){
+        this.authService.logout();
       }
-  
-      if(e.status==403){
-        swal('Acceso denegado', `El usuario ${this.authService.usuario.username} no tiene acceso a este recurso`, 'warning');
-        this.router.navigate(['/inicio']);
-        return true;
-      }
-  
-      return false;
+      this.router.navigate(['/login']);
+      return true;
     }
+
+    if(e.status==403){
+      swal('Acceso denegado', `El usuario ${this.authService.usuario.username} no tiene acceso a este recurso`, 'warning');
+      this.router.navigate(['/inicio']);
+      return true;
+    }
+
+    return false;
+  }
 
     getEmpleados(): Observable<Empleado[]> {
       return this.http.get(this.urlEndPoint, {headers: this.agregarAuthorizationHeader()}).pipe(

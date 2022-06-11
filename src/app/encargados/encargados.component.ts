@@ -3,6 +3,7 @@ import { Encargado } from './encargado';
 import { EncargadoService } from './encargado.service';
 import swal from 'sweetalert2';
 import { ModalService } from '../services/modal.service';
+import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-encargados',
@@ -15,7 +16,8 @@ export class EncargadosComponent implements OnInit {
   encargadoSeleccionado: Encargado;
 
   constructor(private encargadoService : EncargadoService,
-    private modalService: ModalService) { }
+    private modalService: ModalService, 
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.encargadoService.getEncargados().subscribe(
