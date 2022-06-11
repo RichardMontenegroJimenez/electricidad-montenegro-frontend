@@ -26,12 +26,15 @@ import { PerfilEmpleadoComponent } from './empleados/perfil-empleado/perfil-empl
 import { LoginComponent } from './usuarios/login.component';
 import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
+import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { ContactaComponent } from './contacta/contacta.component';
 
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: 'inicio', component: InicioComponent},
+  {path: 'quienes-somos', component: QuienesSomosComponent},
   {path: 'obras', component: ObrasComponent},
   {path: 'obras/form', component: FormObrasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'obras/form/:id', component: FormObrasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -59,7 +62,9 @@ const routes: Routes = [
     InicioComponent,
     PerfilComponent,
     PerfilEmpleadoComponent,
-    LoginComponent
+    LoginComponent,
+    QuienesSomosComponent,
+    ContactaComponent
   ],
   imports: [
     BrowserModule,

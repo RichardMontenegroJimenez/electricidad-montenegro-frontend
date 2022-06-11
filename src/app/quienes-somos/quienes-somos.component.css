@@ -1,0 +1,38 @@
+.contenedor{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    
+}
+.oscuro{
+    filter: brightness(0.4);
+}
+
+.overflow{
+	height: 700px;
+	overflow: hidden;
+}
+
+.centrado{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.centrado p {
+    font-size: 2cm;
+}
+
+.parrafo p {
+    font-size: large;
+}
+
+.tamano{
+    width: 80%;
+}
+
+
+.carousel-inner{
+ height: 200px;
+}
