@@ -11,22 +11,22 @@
     <table class="table table-bordered table-striped" *ngIf="obras?.length>0">
         <thead>
             <tr>
-                <th>Id</th>
+                <th *ngIf="authService.isAuthenticated()">Id</th>
                 <th>Denominación</th>
                 <th>Dirección</th>
                 <th>Ciudad</th> 
-                <th>Enargado</th>
+                <th *ngIf="authService.isAuthenticated()" >Enargado</th>
                 <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
                 <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let obra of obras">
-                <td>{{ obra.id }}</td>
+                <td *ngIf="authService.isAuthenticated()">{{ obra.id }}</td>
                 <td>{{ obra.denominacion }}</td>
                 <td>{{ obra.direccion }}</td>
                 <td>{{ obra.ciudad }}</td>
-                <td>ID: {{ obra.encargado.id }}, {{ obra.encargado.nombre }} {{ obra.encargado.apellido }}</td>
+                <td *ngIf="authService.isAuthenticated()" >ID: {{ obra.encargado.id }}, {{ obra.encargado.nombre }} {{ obra.encargado.apellido }}</td>
                 <td *ngIf="authService.hasRole('ROLE_ADMIN')">
                     <button type="button" name="editar" [routerLink]="['/obras/form', obra.id]" class="btn btn-primary">editar</button>
                 </td>

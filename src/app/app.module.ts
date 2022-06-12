@@ -26,21 +26,28 @@ import { PerfilEmpleadoComponent } from './empleados/perfil-empleado/perfil-empl
 import { LoginComponent } from './usuarios/login.component';
 import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
+import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { ContactaComponent } from './contacta/contacta.component';
+import { EmpresasComponent } from './empresas/empresas.component';
+import { FormEmpresasComponent } from './empresas/form-empresas/form-empresas.component';
 
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: 'inicio', component: InicioComponent},
+  {path: 'quienes-somos', component: QuienesSomosComponent},
   {path: 'obras', component: ObrasComponent},
   {path: 'obras/form', component: FormObrasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'obras/form/:id', component: FormObrasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path: 'encargados', component: EncargadosComponent},
+  {path: 'encargados', component: EncargadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO', 'ROLE_EMPLEADO']}},
   {path: 'encargados/form', component: FormEncargadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: 'encargados/form/:id', component: FormEncargadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path: 'empleados', component: EmpleadosComponent},
+  {path: 'empleados', component: EmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO', 'ROLE_EMPLEADO']}},
   {path: 'empleados/form', component: FormEmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO']}},
   {path: 'empleados/form/:id', component: FormEmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO']} },
+  {path: 'empresas', component: EmpresasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO', 'ROLE_EMPLEADO']}},
+  {path: 'empresas/form', component: FormEmpresasComponent},
   {path: 'login', component: LoginComponent}
 ];
 
@@ -59,7 +66,11 @@ const routes: Routes = [
     InicioComponent,
     PerfilComponent,
     PerfilEmpleadoComponent,
-    LoginComponent
+    LoginComponent,
+    QuienesSomosComponent,
+    ContactaComponent,
+    EmpresasComponent,
+    FormEmpresasComponent
   ],
   imports: [
     BrowserModule,
