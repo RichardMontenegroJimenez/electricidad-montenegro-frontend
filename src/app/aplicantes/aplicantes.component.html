@@ -1,0 +1,35 @@
+<div class="card border-dark mb-3">
+    <div class="card-header">Empleasos aplicantes</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">Solicitudes recibidas de empleados aplicantes</h5>
+    </div>
+    
+    <table class="table table-bordered table-striped" *ngIf="aplicantes?.length>0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Email</th> 
+                <th>Texto</th> 
+                <th>Fecha de creación</th> 
+                <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let aplicante of aplicantes">
+                <td>{{ aplicante.id }}</td>
+                <td>{{ aplicante.nombre }}</td>
+                <td>{{ aplicante.dni }}</td>
+                <td>{{ aplicante.email }}</td>
+                <td>
+                    <div class="campo-texto">{{ aplicante.text }}</div>
+                </td>
+                <td>{{ aplicante.createAt }}</td>
+                <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                    <button type="button" name="eliminar" (click)='delete(aplicante)' class="btn btn-danger ntn-sm">eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
