@@ -13,7 +13,7 @@ export class FormAplicantesComponent implements OnInit {
 
   public aplicante: Aplicante = new Aplicante();
 
-  public titulo:string = "Formulario para solicitud de empleo"
+  public titulo:string = "FORMULARIO PARA SOLICITUD DE EMPLEO"
 
   public errores: string[];
 

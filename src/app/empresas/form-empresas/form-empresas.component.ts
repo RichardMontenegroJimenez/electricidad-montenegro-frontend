@@ -13,7 +13,7 @@ export class FormEmpresasComponent implements OnInit {
 
   public empresa: Empresa = new Empresa();
 
-  public titulo:string = "Formulario para empresas"
+  public titulo:string = "FORMULARIO PARA EMPRESAS"
 
   public errores: string[];
 

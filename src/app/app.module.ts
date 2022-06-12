@@ -30,6 +30,9 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { ContactaComponent } from './contacta/contacta.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { FormEmpresasComponent } from './empresas/form-empresas/form-empresas.component';
+import { AplicantesComponent } from './aplicantes/aplicantes.component';
+import { FormAplicantesComponent } from './aplicantes/form-aplicantes/form-aplicantes.component';
+import { BandejaEntradaComponent } from './bandeja-entrada/bandeja-entrada.component';
 
 
 
@@ -48,6 +51,9 @@ const routes: Routes = [
   {path: 'empleados/form/:id', component: FormEmpleadosComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO']} },
   {path: 'empresas', component: EmpresasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO', 'ROLE_EMPLEADO']}},
   {path: 'empresas/form', component: FormEmpresasComponent},
+  {path: 'aplicantes', component: AplicantesComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO', 'ROLE_EMPLEADO']}},
+  {path: 'bandeja-entrada', component: BandejaEntradaComponent, canActivate:[AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_ENCARGADO', 'ROLE_EMPLEADO']}},
+  {path: 'aplicantes/form', component: FormAplicantesComponent},
   {path: 'login', component: LoginComponent}
 ];
 
@@ -70,7 +76,10 @@ const routes: Routes = [
     QuienesSomosComponent,
     ContactaComponent,
     EmpresasComponent,
-    FormEmpresasComponent
+    FormEmpresasComponent,
+    AplicantesComponent,
+    FormAplicantesComponent,
+    BandejaEntradaComponent
   ],
   imports: [
     BrowserModule,
